@@ -1,0 +1,5 @@
+body {
+    background-image: -webkit-linear-gradient(left, transparent 78ch,rgba(39,39,39,.5) 78ch, rgba(39,39,39,.5) 100%);
+
+    width: 100%;
+}
