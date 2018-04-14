@@ -1,0 +1,113 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bfdcbf0d33f3376a956707e746d10f3ef2d8d9caa1c214361c9c08f00a1c8409" "acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default)))
+ '(inhibit-startup-screen t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; MELPA
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
+
+;; Credits go to https://stackoverflow.com/a/10093312/5096023
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Only need to do that for use-package)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+;; ===== Eye-candy =====
+
+;; GUIs are for the weak
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
+;; Colour theme
+(use-package zenburn-theme :ensure t)
+
+;; Show line number
+(global-linum-mode t)
+;; Show column number
+(setq column-number-mode t)
+
+;; C tab style
+(setq c-default-style "linux")
+
+;; ===== Modes =====
+
+;; ----- Whitespace -----
+;; Delete whitespaces on saving
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; Disable whitespace mode
+(defun disable-whitespace-cleanup()
+  (interactive)
+  (remove-hook 'before-save-hook 'whitespace-cleanup))
+
+;; ----- Static analysis -----
+(use-package flycheck :ensure t)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;;(add-to-list 'load-path "~/.emacs.d/packages/flycheck-tla/")
+;;(require 'flycheck-tla)
+
+;; Helm
+(use-package helm :ensure t)
+(helm-mode 1)
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "C-x C-r") #'helm-find)
+
+;; ----- YAML -----
+;;(add-to-list 'load-path "~/.emacs.d/packages/yaml-mode/")
+;;(require 'yaml-mode)
+;;(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
+;; ----- TLA -----
+;;(add-to-list 'load-path "~/.emacs.d/packages/tla-mode/")
+;;(require 'tla-mode)
+
+(defun call-pluscal-on-current()
+  (interactive)
+  (shell-command
+   (format "pluscal %s"
+	   (shell-quote-argument (buffer-file-name))))
+  )
+
+
+;;(add-to-list 'load-path "~/.emacs.d/packages/tlc-mode/")
+;;(require 'tlc-mode)
+
+;; ===== Misc =====
+
+;; Change backup (~) behaviour
+(setq backup-directory-alist `(("." . "~/.emacs_saves")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
+;; Enable auto-complete
+;;(ac-config-default)
+
+;;(define-key ac-mode-map (kbd "<C-tab>") 'auto-complete)
+
+;; enable python auto-complete
+;;(add-hook 'python-mode-hook 'jedi:setup)
+;;(setq jedi:complete-on-dot t)
