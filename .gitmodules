@@ -3,7 +3,7 @@
 	url = git@github.com:yoshiki/yaml-mode.git
 [submodule "emacs-packages/tla-mode"]
 	path = emacs-packages/tla-mode
-	url = git@github.com:ratish-punnoose/tla-mode.git
+	url = git@github.com:valschneider/tla-mode.git
 [submodule "emacs-packages/flycheck-tla"]
 	path = emacs-packages/flycheck-tla
 	url = git@github.com:iamarcel/flycheck-tla.git
