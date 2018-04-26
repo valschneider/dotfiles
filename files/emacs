@@ -59,26 +59,29 @@
   (remove-hook 'before-save-hook 'whitespace-cleanup))
 
 ;; ----- Static analysis -----
-(use-package flycheck :ensure t)
+(use-package flycheck
+  :ensure t
+  :config (add-hook 'after-init-hook #'global-flycheck-mode))
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-to-list 'load-path "~/.emacs.d/packages/flycheck-tla/")
-(require 'flycheck-tla)
+(use-package flycheck-tla)
 
 ;; Helm
-(use-package helm :ensure t)
-(helm-mode 1)
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x C-r") #'helm-find)
+(use-package helm
+  :ensure t
+  :config (helm-mode 1)
+  :bind (("M-x" . helm-M-x)
+	 ("C-x C-r" . helm-find)))
 
 ;; ----- YAML -----
 (add-to-list 'load-path "~/.emacs.d/packages/yaml-mode/")
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+(use-package yaml-mode
+  :config (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
 
 ;; ----- TLA -----
 (add-to-list 'load-path "~/.emacs.d/packages/tla-mode/")
-(require 'tla-mode)
+(use-package tla-mode)
 
 (defun call-pluscal-on-current()
   (interactive)
@@ -87,9 +90,9 @@
 	   (shell-quote-argument (buffer-file-name))))
   )
 
-
-;;(add-to-list 'load-path "~/.emacs.d/packages/tlc-mode/")
-;;(require 'tlc-mode)
+(defun highlight-tlc-traceback()
+  (interactive)
+  (highlight-regexp "\\(pc\\ =.*\\)\\|\\(stack\\ =.*\\)\\|\\(context\\ =.*\\)" 'hi-green))
 
 ;; ===== Misc =====
 
