@@ -114,11 +114,15 @@
 ;; Make selection sane
 (delete-selection-mode t)
 
+;; Prevent agenda from nuking my windows
+(setq org-agenda-window-setup 'current-window)
+
 ;; Window selection goodness
-(global-set-key (kbd "C-c <left>")  'windmove-left)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <up>")    'windmove-up)
-(global-set-key (kbd "C-c <down>")  'windmove-down)
+;; NOTE: not so good with orgmode...
+;; (global-set-key (kbd "C-c <left>")  'windmove-left)
+;; (global-set-key (kbd "C-c <right>") 'windmove-right)
+;; (global-set-key (kbd "C-c <up>")    'windmove-up)
+;; (global-set-key (kbd "C-c <down>")  'windmove-down)
 
 ;; Enable auto-complete
 ;;(ac-config-default)
