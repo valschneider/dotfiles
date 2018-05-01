@@ -92,7 +92,14 @@
 
 (defun highlight-tlc-traceback()
   (interactive)
-  (highlight-regexp "\\(pc\\ =.*\\)\\|\\(stack\\ =.*\\)\\|\\(context\\ =.*\\)" 'hi-green))
+  ;; Software control
+  (highlight-regexp "\\(pc\\|stack\\)\\ =.*" 'hi-green)
+  (highlight-regexp "context\\ =.*" 'hi-pink)
+  ;; Software data
+  (highlight-regexp "\\(lrs\\ |->\\|irqs\\|ap_list\\|used_lrs\\|apr\\)" 'hi-blue)
+  ;; Hardware
+  (highlight-regexp "\\ \\(lrs\\|distributor\\|queue\\|ack\\|vcpu_itfs\\|cpu_itfs\\)\\ =.*" 'hi-yellow))
+
 
 ;; ===== Misc =====
 
