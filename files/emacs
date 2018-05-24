@@ -21,14 +21,22 @@
 ;; GUIs are for the weak
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
-
-;; Colour theme
-(use-package zenburn-theme :ensure t)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; Show line number
 (global-linum-mode t)
 ;; Show column number
 (setq column-number-mode t)
+
+;; Don't put anything in scratch
+(setq initial-scratch-message nil)
+
+;; 3 letters is too much
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Colour theme
+(use-package zenburn-theme :ensure t)
 
 ;; C tab style
 (setq c-default-style "linux")
