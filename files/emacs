@@ -72,6 +72,7 @@
 ;; Helm
 (use-package helm
   :ensure t
+  :init (setq helm-split-window-in-side-p t)
   :config (helm-mode 1)
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-r" . helm-find)))
