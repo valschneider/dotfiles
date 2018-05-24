@@ -47,10 +47,18 @@
 ;; Delete whitespaces on saving
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-;; Disable whitespace mode
-(defun disable-whitespace-cleanup()
+;; Local toggle
+(defun toggle-whitespace-cleanup()
   (interactive)
-  (remove-hook 'before-save-hook 'whitespace-cleanup))
+
+  ;; FIXME: this wants to use buffer local hook
+  (if (member 'whitespace-cleanup before-save-hook)
+      (progn
+	(remove-hook 'before-save-hook 'whitespace-cleanup nil)
+	(message "whitespace-cleanup disabled"))
+    (progn
+      (add-hook 'before-save-hook 'whitespace-cleanup nil nil)
+      (message "whitespace-cleanup enabled"))))
 
 ;; ----- Static analysis -----
 (use-package flycheck
