@@ -82,7 +82,9 @@
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-r" . helm-find)))
 
-(use-package ggtags :ensure t)
+(use-package ggtags
+  :ensure t
+  :bind (("M-*" . xref-pop-marker-stack)))
 
 (use-package magit :ensure t)
 
