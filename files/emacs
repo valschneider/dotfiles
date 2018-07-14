@@ -36,7 +36,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Colour theme
-(use-package zenburn-theme :ensure t)
+(use-package zenburn-theme)
+(load-theme 'zenburn t)
 
 ;; C tab style
 (setq c-default-style "linux")
@@ -59,6 +60,10 @@
     (progn
       (add-hook 'before-save-hook 'whitespace-cleanup nil nil)
       (message "whitespace-cleanup enabled"))))
+
+(defun reload-emacs()
+  (interactive)
+  (load-file "~/.emacs"))
 
 ;; ----- Static analysis -----
 (use-package flycheck
