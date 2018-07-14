@@ -133,10 +133,15 @@
 
 ;; Let language major mode take over for indents
 (setq org-src-fontify-natively t
-      org-src-tab-acts-natively t)
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
 
 ;; Say no to safety
 (setq org-confirm-babel-evaluate nil)
+
+;; Say yes to counting stuff
+(setq org-hierarchical-checkbox-statistics nil)
+(setq org-hierarchical-todo-statistics nil)
 
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
