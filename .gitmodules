@@ -1,9 +1,9 @@
 [submodule "emacs-packages/tla-mode"]
-	path = emacs-packages/tla-mode
+	path = emacs-dir/packages/tla-mode
 	url = git@github.com:valschneider/tla-mode.git
 [submodule "emacs-packages/flycheck-tla"]
-	path = emacs-packages/flycheck-tla
+	path = emacs-dir/packages/flycheck-tla
 	url = git@github.com:iamarcel/flycheck-tla.git
 [submodule "emacs-packages/ox-jira"]
-	path = emacs-packages/ox-jira
+	path = emacs-dir/packages/ox-jira
 	url = git@github.com:stig/ox-jira.el.git
