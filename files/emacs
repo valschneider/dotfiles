@@ -180,6 +180,9 @@ background of code to the current emacs theme"
 
 (add-hook 'org-export-before-processing-hook 'org-bg-css-hook)
 
+;; Default CSS for html exporting
+(setq org-html-head "<link href=\"http://doc.norang.ca/org.css\" rel=\"stylesheet\"></link>")
+
 ;; Window selection goodness
 ;; NOTE: not so good with orgmode...
 ;; (global-set-key (kbd "C-c <left>")  'windmove-left)
