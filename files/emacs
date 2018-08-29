@@ -36,8 +36,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Colour theme
-(use-package zenburn-theme)
-(load-theme 'zenburn t)
+(use-package zenburn-theme
+  :ensure t
+  :config (load-theme 'zenburn t))
 
 ;; C tab style
 (setq c-default-style "linux")
