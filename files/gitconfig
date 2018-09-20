@@ -9,6 +9,9 @@ email = valentin.schneider@arm.com
 	slog = log --oneline
 	woof = log --all --decorate --oneline --graph
 
+	klog = log --format='%C(auto)%h %C(red)(\"%C(auto)%s%C(red)\")%C(auto)' --abbrev=12
+	kshow = log --format='%C(auto)%h %C(red)(\"%C(auto)%s%C(red)\")%C(auto)' --abbrev=12  -n1
+
 	# https://stackoverflow.com/a/5188364/5096023
 	btime = for-each-ref --sort=committerdate --format='%(color:yellow)%(objectname:short)%(color:reset) %(refname:short) (%(color:green)%(committerdate:relative)%(color:reset))'
 
