@@ -16,6 +16,8 @@ email = valentin.schneider@arm.com
 	btime = for-each-ref --sort=committerdate --format='%(color:yellow)%(objectname:short)%(color:reset) %(refname:short) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 	send-email-test = send-email --to valentin.schneider@arm.com --no-chain-reply-to --no-signed-off-by-cc --suppress-cc=all --suppress-from
+
+	send-email-lkml = send-email --to linux-kernel@vger.kernel.org --confirm always --no-chain-reply-to --suppress-from
 [sendemail]
 	confirm = always
 	multiedit = false
