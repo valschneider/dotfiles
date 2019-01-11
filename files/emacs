@@ -40,8 +40,6 @@
   :ensure t
   :config (load-theme 'zenburn t))
 
-;; C tab style
-(setq c-default-style "linux")
 
 ;; ===== Modes =====
 
@@ -96,6 +94,27 @@
    magit-log-cutoff-length 50
    magit-revision-insert-related-refs nil))
 
+;; ----- Kernel -----
+
+(setq c-default-style "linux")
+
+(defun locate-buffer-dominating-file (file)
+  (and (buffer-file-name)
+       (locate-dominating-file (buffer-file-name) file)))
+
+(add-hook 'c-mode-hook 'ggtags-mode)
+
+(use-package flycheck-checkpatch
+  :load-path "~/.emacs.d/packages/flycheck-checkpatch/"
+  :ensure t
+  :config
+  (eval-after-load 'flycheck
+    '(flycheck-checkpatch-setup)))
+  ;; (add-hook 'flycheck-mode-hook
+  ;;	    (lambda ()
+  ;;	      (add-to-list 'flycheck-gcc-include-path
+  ;;			   (concat (locate-buffer-dominating-file "include") "include")))))
+  ;; (flycheck-add-next-checker 'c/c++-gcc 'checkpatch))
 ;; ----- YAML -----
 (add-to-list 'load-path "~/.emacs.d/packages/yaml-mode/")
 (use-package yaml-mode
@@ -144,6 +163,7 @@
 ;; Let language major mode take over for indents
 (setq org-src-fontify-natively t
       org-src-tab-acts-natively t
+      org-src-preserve-indentation t
       org-edit-src-content-indentation 0)
 
 ;; Say no to safety
@@ -162,6 +182,7 @@
  'org-babel-load-languages
  (append org-babel-load-languages
 	 '((python . t)
+	   (sh . t)
 	   (C . t)
 	   (plantuml . t))))
 
