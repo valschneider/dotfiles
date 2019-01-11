@@ -6,7 +6,7 @@ email = valentin.schneider@arm.com
 [push]
 	default = simple
 [alias]
-	slog = log --oneline
+	slog = log --oneline --decorate
 	woof = log --all --decorate --oneline --graph
 
 	klog = log --format='%C(auto)%h %C(red)(\"%C(auto)%s%C(red)\")%C(auto)' --abbrev=12
