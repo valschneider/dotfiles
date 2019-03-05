@@ -1,6 +1,3 @@
-[submodule "emacs-packages/yaml-mode"]
-	path = emacs-packages/yaml-mode
-	url = git@github.com:yoshiki/yaml-mode.git
 [submodule "emacs-packages/tla-mode"]
 	path = emacs-packages/tla-mode
 	url = git@github.com:valschneider/tla-mode.git
