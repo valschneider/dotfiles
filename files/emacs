@@ -1,5 +1,8 @@
 ;; -*- mode: emacs-lisp; -*-
 
+;; I'm an adult for crying out loud, let me handle this myself
+(setq package--init-file-ensured t)
+
 (add-to-list 'load-path "~/.emacs.d/init")
 
 (load-library "packages")
