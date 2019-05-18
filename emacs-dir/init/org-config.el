@@ -56,13 +56,14 @@ background of code to the current emacs theme"
 ;; TODO: crop pdf cause it takes a whole page ATM
 ;; TODO: needs exports none when creating slides, but exports code when
 ;; generating
+;; TODO: disable/enable theme (special func maybe?)
 (defun latex-html-src-block (src-block contents info)
   (let ((out-file (org-export-read-attribute :attr_htmltopdf src-block :file)))
     (if (not out-file)
 	(org-export-with-backend 'latex src-block contents info)
 
       (let* ((out-file (org-export-read-attribute :attr_htmltopdf src-block :file))
-	     (in-file (org-babel-temp-file "ltxhtml-"))
+	     (in-file (org-babel-temp-file "ltxhtml-" ".html"))
 
 	     (full-body (concat
 			 ;; TODO: this is a manual slide-in of org-bg-css-hook,
@@ -77,17 +78,19 @@ background of code to the current emacs theme"
 				    bg fg)))))
 
 	     (cmd
-	      (concat "google-chrome "
-		      "--headless "
-		      "--disable-gpu "
-		      "--no-margins "
-		      "--print-to-pdf=" (org-babel-process-file-name out-file)
-		      " " (org-babel-process-file-name in-file))))
-	;; Doesn't like babel html for some reason :/
-	;; (concat "wkhtmltopdf "
-	;;	      (org-babel-process-file-name in-file)
-	;;	      " "
-	;;	      (org-babel-process-file-name out-file))))
+	      (concat "wkhtmltopdf "
+		      ;; Remove all margins
+		      "-B 0 -L 0 -R 0 -T 0 "
+		      ;; "--disable-smart-shrinking"
+		      (org-babel-process-file-name in-file)
+		      " "
+		      (org-babel-process-file-name out-file))))
+	      ;; (concat "google-chrome "
+	      ;;	      "--headless "
+	      ;;	      "--disable-gpu "
+	      ;;	      "--no-margins "
+	      ;;	      "--print-to-pdf=" (org-babel-process-file-name out-file)
+	      ;;	      " " (org-babel-process-file-name in-file))))
 
 	(with-temp-file in-file (insert full-body))
 	(message "%s" cmd) (org-babel-eval cmd "")))))
