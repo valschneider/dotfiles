@@ -70,3 +70,28 @@
 ;; Auto chmod +x
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+(defun get-git-ref-at-point ()
+  (interactive)
+  (let ((msg
+    (format "%s:%s @l%i"
+	    (magit-rev-abbrev (magit-headish))
+	    (magit-current-file)
+	    (line-number-at-pos))))
+    (kill-new msg)
+    (message "%s" msg)))
+
+(defun magit-ref-at-point ()
+  ;; Stolen from magit-show-commit
+  (or (and (bound-and-true-p magit-blame-mode)
+	   (magit-current-blame-chunk)
+	   (magit-branch-or-commit-at-point)
+      (magit-commit-at-point))))
+
+(defun magit-copy-ref-at-point ()
+  (interactive)
+  (kill-new (magit-commit-at-point)))
+
+(defun magit-copy-kref-at-point ()
+  (interactive)
+  ;; (message "%s" (magit-ref-at-point)))
+  (kill-new (magit-git-str "kshow" (magit-commit-at-point))))
