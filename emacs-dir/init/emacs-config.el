@@ -66,3 +66,7 @@
   (load-file "~/.emacs"))
 
 (setq c-default-style "linux")
+
+;; Auto chmod +x
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
