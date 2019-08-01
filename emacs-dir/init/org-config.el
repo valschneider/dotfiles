@@ -1,8 +1,7 @@
-;; Prevent agenda from nuking my windows
-
 (require 'org)
 (require 'ox)
 
+ ;; Prevent agenda from nuking my windows
 (setq org-agenda-window-setup 'current-window)
 
 ;; Let language major mode take over for indents
