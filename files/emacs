@@ -9,3 +9,4 @@
 (load-library "custom-packages")
 (load-library "emacs-config")
 (load-library "org-config")
+(load-library "mu4e-config")
