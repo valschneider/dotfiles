@@ -58,7 +58,9 @@
    ;; Limit the max logcount and don't use --graph
    magit-log-section-arguments (list "-n256" "--decorate")
    magit-log-cutoff-length 50
-   magit-revision-insert-related-refs nil))
+   magit-revision-insert-related-refs nil)
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
+
 
 (use-package ggtags
   :ensure t
