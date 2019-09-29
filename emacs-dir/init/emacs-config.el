@@ -34,7 +34,10 @@
 (delete-selection-mode t)
 
 ;; Delete whitespaces on saving
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook
+	  (lambda ()
+	    (when (not (eq major-mode 'org-mode))
+	      (whitespace-cleanup))))
 
 ;; Local toggle
 (defun toggle-whitespace-cleanup()
