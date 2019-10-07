@@ -27,13 +27,16 @@
 (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar"
       plantuml-jar-path "/opt/plantuml/plantuml.jar")
 
+(setq org-ditaa-jar-path "/opt/ditaa/ditaa.jar")
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  (append org-babel-load-languages
 	 '((python . t)
-	   (sh . t)
+	   (shell . t)
 	   (C . t)
-	   (plantuml . t))))
+	   (plantuml . t)
+	   (ditaa . t))))
 
 ;; https://emacs.stackexchange.com/q/3374/19129
 (defun org-bg-css-hook (exporter)
