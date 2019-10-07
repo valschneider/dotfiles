@@ -39,3 +39,17 @@
      (match-string 1 contact)
      (match-string 2 contact))
     ))
+
+(fset 'original-git-commit-self-ident (symbol-function 'git-commit-self-ident))
+
+(defun git-commit-self-ident ()
+  ;; Certain commit actions (e.g. review) assume they are always done by the
+  ;; author, which isn't always true. Piggy back off of read-ident, proposing
+  ;; the author ident as default suggestion.
+  ;; Bleh, it's actually more painful that I thought. Ideally I would just
+  ;; have helm point at some value by default, but I can't see how.
+  ;; Luckily I'm at the top of the mu4e email list, so let's go for that.
+
+  ;; (let ((ident (original-git-commit-self-ident)))
+  ;;   (git-commit-read-ident (format "%s <%s>" (nth 0 ident) (nth 1 ident)))))
+  (git-commit-read-ident))
