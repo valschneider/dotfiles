@@ -68,7 +68,10 @@
   (interactive)
   (load-file "~/.emacs"))
 
+(add-hook 'c-mode-hook (lambda () (set-variable 'fill-column 80)))
 (setq c-default-style "linux")
+
+(add-hook 'git-commit-setup-hook (lambda () (set-variable 'fill-column 75)))
 
 ;; Auto chmod +x
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
