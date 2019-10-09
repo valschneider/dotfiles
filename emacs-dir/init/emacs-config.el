@@ -6,8 +6,6 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 
-;; Show line number
-(global-linum-mode t)
 ;; Show column number
 (setq column-number-mode t)
 
