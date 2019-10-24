@@ -18,8 +18,8 @@
 (setq org-hierarchical-todo-statistics nil)
 
 (defun org-mode-custom-setup()
-  ;; Slows things down worse to french bureaucracy levels
-  (linum-mode -1))
+  (set-variable 'fill-column 80)
+  (auto-fill-mode))
 
 (add-hook 'org-mode-hook 'org-mode-custom-setup)
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
