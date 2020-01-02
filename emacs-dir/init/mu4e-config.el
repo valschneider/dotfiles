@@ -21,7 +21,7 @@
   (helm :sources
 	(helm-build-sync-source "emails"
 	  :candidates
-	  (hash-table-keys mu4e~contacts))
+	    (hash-table-keys mu4e~contacts))
 	;; :fuzzy-match t
 	:buffer "*Email completion*"))
 
@@ -39,6 +39,12 @@
      (match-string 1 contact)
      (match-string 2 contact))
     ))
+
+(defun mu4e-select-addr ()
+  (interactive)
+  (let ((contact (mu4e-select-contact)))
+    (string-match "\\(.*[[:alnum:]]\\)[[:space:]]*<\\(.*\\)>" contact)
+    (insert (match-string 2 contact))))
 
 (fset 'original-git-commit-self-ident (symbol-function 'git-commit-self-ident))
 
