@@ -65,7 +65,12 @@ def handle_dotfiles(directory):
 
             target_dir = get_target_dir(def_args)
             dotfile = Dotfile(source, target_dir, **def_args)
-            dotfile.install()
+
+            try:
+                dotfile.install()
+            except (FileExistsError, FileNotFoundError) as exc:
+                print(exc)
+
 
     # Install all other files
     target_dir = get_target_dir(defaults)
@@ -74,7 +79,11 @@ def handle_dotfiles(directory):
             continue
 
         dotfile = Dotfile(source, target_dir, **defaults)
-        dotfile.install()
+
+        try:
+            dotfile.install()
+        except (FileExistsError, FileNotFoundError) as exc:
+            print(exc)
 
 def main():
     here = os.path.dirname(os.path.realpath(__file__))
@@ -86,10 +95,7 @@ def main():
         if os.path.basename(d).startswith('.'):
             continue
 
-        try:
-            handle_dotfiles(d)
-        except (FileExistsError, FileNotFoundError) as exc:
-            print(exc)
+        handle_dotfiles(d)
 
 if __name__ == "__main__":
     main()
