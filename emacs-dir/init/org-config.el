@@ -38,6 +38,12 @@
 	   (plantuml . t)
 	   (ditaa . t))))
 
+(setq org-file-apps
+      '((auto-mode . emacs)
+	("\\.x?html?\\'" . "firefox %s")
+	("\\.pdf\\'" . "evince \"%s\"")
+	("\\.dat\\'" . "kernelshark %s")))
+
 ;; https://emacs.stackexchange.com/q/3374/19129
 (defun org-bg-css-hook (exporter)
   "Insert custom inline css to automatically set the
