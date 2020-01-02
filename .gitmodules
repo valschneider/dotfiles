@@ -1,3 +1,9 @@
 [submodule "work/coccinelle"]
 	path = work/coccinelle
 	url = https://github.com/coccinelle/coccinelle
+[submodule "emacs/packages/tla-mode"]
+	path = emacs/packages/tla-mode
+	url = git@github.com:valschneider/tla-mode.git
+[submodule "emacs/packages/flycheck-tla"]
+	path = emacs/packages/flycheck-tla
+	url = git@github.com:iamarcel/flycheck-tla.git
