@@ -55,6 +55,7 @@ def handle_dotfiles(directory):
             visited.update(
                 [os.path.join(directory, p) for p in dir_settings.get("ignore", [])])
 
+        # Install files called out in layout.yaml
         for source, args in layout.items():
             source = os.path.join(directory, source)
             visited.add(source)
@@ -66,11 +67,12 @@ def handle_dotfiles(directory):
             dotfile = Dotfile(source, target_dir, **def_args)
             dotfile.install()
 
+    # Install all other files
+    target_dir = get_target_dir(defaults)
     for source in listdir(directory):
         if source in visited:
             continue
 
-        target_dir = get_target_dir(defaults)
         dotfile = Dotfile(source, target_dir, **defaults)
         dotfile.install()
 
