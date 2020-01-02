@@ -7,3 +7,6 @@
 [submodule "emacs-packages/ox-jira"]
 	path = emacs-dir/packages/ox-jira
 	url = git@github.com:stig/ox-jira.el.git
+[submodule "work/coccinelle"]
+	path = work/coccinelle
+	url = https://github.com/coccinelle/coccinelle
