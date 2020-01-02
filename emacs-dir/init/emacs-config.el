@@ -99,3 +99,12 @@
   (interactive)
   ;; (message "%s" (magit-ref-at-point)))
   (kill-new (magit-git-str "kshow" (magit-commit-at-point))))
+
+;; https://stackoverflow.com/a/5194503
+(defun remove-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match " " nil t))))
