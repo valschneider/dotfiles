@@ -1,0 +1,4 @@
+__directory__:
+  defaults:
+    target_dir: "~/.emacs.d/"
+    create_parent: True

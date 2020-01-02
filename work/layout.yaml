@@ -1,0 +1,4 @@
+__directory__:
+  defaults:
+    target_dir: "~/Work"
+    create_parent: True
