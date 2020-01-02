@@ -31,3 +31,6 @@ CHECKER is the flycheck checker to which NEXT-CHECKER will be chained."
     '(progn
        (flycheck-checkpatch-setup)
        (flycheck-add-next-checker-safe 'kernel-make 'checkpatch-code))))
+
+(use-package dwarf-mode
+  :load-path "~/.emacs.d/packages/dwarf-mode/")
