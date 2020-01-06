@@ -73,7 +73,11 @@
   :init
   (add-hook 'c-mode-hook 'ggtags-mode)
   (add-hook 'asm-mode-hook 'ggtags-mode)
-  :bind (("M-*" . xref-pop-marker-stack)))
+  :bind
+  (("M-*" . xref-pop-marker-stack)))
+
+(use-package dts-mode
+  :ensure t)
 
 ;; TODO: find a way to squash that in the use-package
 ;; seems like loading ggtags is deferred, so I need this otherwise I have to
