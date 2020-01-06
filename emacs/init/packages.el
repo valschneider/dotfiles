@@ -33,9 +33,13 @@
 (use-package helm
   :ensure t
   :init (setq helm-split-window-inside-p t)
-  :config (helm-mode 1)
-  :bind (("M-x" . helm-M-x)
-	 ("C-x C-r" . helm-find)))
+  :config
+  (helm-mode 1)
+  (add-to-list 'helm-completing-read-handlers-alist
+	       '(ggtags-find-tag-dwim . helm-completing-read-default-find-tag))
+  :bind
+  (("M-x" . helm-M-x)
+   ("C-x C-r" . helm-find)))
 
 (use-package helm-descbinds
   :ensure t
