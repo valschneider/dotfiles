@@ -7,3 +7,6 @@
 [submodule "emacs/packages/flycheck-tla"]
 	path = emacs/packages/flycheck-tla
 	url = git@github.com:iamarcel/flycheck-tla.git
+[submodule "emacs/packages/flycheck-checkpatch"]
+	path = emacs/packages/flycheck-checkpatch
+	url = git@github.com:valschneider/flycheck-checkpatch.git
