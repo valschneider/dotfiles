@@ -31,24 +31,29 @@
 ;; Make selection sane
 (delete-selection-mode t)
 
-;; Delete whitespaces on saving
-(add-hook 'before-save-hook
-	  (lambda ()
-	    (when (not (eq major-mode 'org-mode))
-	      (whitespace-cleanup))))
+;; Automatic whitespace cleanup
+(defvar save-cleanup-enabled t)
+(defvar no-save-cleanup-list (list 'org-mode 'patch-mode))
+(defun save-cleanup()
+  (unless (or
+	   (member major-mode no-save-cleanup-list)
+	   (not save-cleanup-enabled))
+    (whitespace-cleanup)))
 
-;; Local toggle
 (defun toggle-whitespace-cleanup()
   (interactive)
 
-  ;; FIXME: this wants to use buffer local hook
-  (if (member 'whitespace-cleanup before-save-hook)
+  ;; FIXME: this should be buffer local
+  (if save-cleanup-enabled
       (progn
-	(remove-hook 'before-save-hook 'whitespace-cleanup nil)
+	(setq save-cleanup-enabled nil)
 	(message "whitespace-cleanup disabled"))
     (progn
-      (add-hook 'before-save-hook 'whitespace-cleanup nil nil)
+      (setq save-cleanup-enabled t)
       (message "whitespace-cleanup enabled"))))
+
+;; Delete whitespaces on saving
+(add-hook 'before-save-hook 'save-cleanup)
 
 ;; Code-folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)
