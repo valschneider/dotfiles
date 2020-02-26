@@ -61,3 +61,19 @@
   (git-commit-read-ident))
 
 (add-to-list 'mu4e-headers-actions '("apply as patch" . mu4e-action-git-apply-mbox) t)
+
+(load-library "mu4e-thread")
+
+(defvar vs/mu4e-headers-search-query nil)
+(defun vs/mu4e-headers-search-register (query)
+  (setq vs/mu4e-headers-search-query query))
+
+(add-hook 'mu4e-headers-search-hook 'vs/mu4e-headers-search-register)
+
+(defun vs/mu4e-headers-main-view-threading ()
+  ;; I only want to fold threads in the "main" view, i.e. unfiltered maildir.
+  ;; This is my ugly attempt at it. It kinda works.
+  (unless (string-match "msgid" vs/mu4e-headers-search-query)
+    (mu4e-headers-fold-all)))
+
+(add-hook 'mu4e-headers-found-hook 'vs/mu4e-headers-main-view-threading)
