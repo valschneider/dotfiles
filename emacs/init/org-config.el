@@ -38,6 +38,8 @@
 	   (plantuml . t)
 	   (ditaa . t))))
 
+(setq org-babel-python-command "python3")
+
 (setq org-file-apps
       '((auto-mode . emacs)
 	("\\.x?html?\\'" . "firefox %s")
