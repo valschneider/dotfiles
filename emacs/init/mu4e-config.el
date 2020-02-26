@@ -59,3 +59,5 @@
   ;; (let ((ident (original-git-commit-self-ident)))
   ;;   (git-commit-read-ident (format "%s <%s>" (nth 0 ident) (nth 1 ident)))))
   (git-commit-read-ident))
+
+(add-to-list 'mu4e-headers-actions '("apply as patch" . mu4e-action-git-apply-mbox) t)
