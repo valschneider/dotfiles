@@ -100,12 +100,6 @@ background of code to the current emacs theme"
 		      (org-babel-process-file-name in-file)
 		      " "
 		      (org-babel-process-file-name out-file))))
-	      ;; (concat "google-chrome "
-	      ;;	      "--headless "
-	      ;;	      "--disable-gpu "
-	      ;;	      "--no-margins "
-	      ;;	      "--print-to-pdf=" (org-babel-process-file-name out-file)
-	      ;;	      " " (org-babel-process-file-name in-file))))
 
 	(with-temp-file in-file (insert full-body))
 	(message "%s" cmd) (org-babel-eval cmd "")))))
