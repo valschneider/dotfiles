@@ -77,3 +77,10 @@
     (mu4e-headers-fold-all)))
 
 (add-hook 'mu4e-headers-found-hook 'vs/mu4e-headers-main-view-threading)
+
+(defun vs/message-tweak-unique-id (id)
+  "Replace the standard '.fsf' suffix with a personal touch.
+ID is the message-id expected to be created from message-unique-id."
+  (replace-regexp-in-string "\.fsf$" ".mognet" id))
+
+(advice-add 'message-unique-id :filter-return #'vs/message-tweak-unique-id)
