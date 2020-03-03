@@ -75,6 +75,7 @@
 (setq c-default-style "linux")
 
 (add-hook 'git-commit-setup-hook (lambda () (set-variable 'fill-column 75)))
+(add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
 
 ;; Auto chmod +x
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
