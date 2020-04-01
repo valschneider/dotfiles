@@ -1,5 +1,10 @@
 ;; Configuration of mu4e
 
+(defun vs/mu4e-compose-mode ()
+  (set-variable 'fill-column 75)
+  (flyspell-mode)
+  (flyspell-buffer))
+
 (use-package mu4e
   :load-path "/usr/local/share/emacs/site-lisp/mu4e"
   :config
@@ -17,7 +22,8 @@
 			      (:flags . 6)
 			      (:mailing-list . 10)
 			      (:from . 22)
-			      (:subject)))))
+			      (:subject))))
+  (add-hook 'mu4e-compose-mode-hook 'vs/mu4e-compose-mode))
 
 (defun mu4e-select-contact ()
   (mu4e~request-contacts)
