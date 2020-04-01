@@ -10,7 +10,7 @@
 	user-mail-address "valentin.schneider@arm.com")
 
   ;; mu4e cosmetics
-  (setq mu4e-headers-date-format "%Y-%m-%d %H:%M")
+  (setq mu4e-headers-date-format "%d/%m/%y %R")
   (setq mu4e-split-view 'vertical)
   (setq mu4e-headers-fields (quote
 			     ((:human-date . 22)
