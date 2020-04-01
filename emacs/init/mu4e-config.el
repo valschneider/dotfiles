@@ -10,7 +10,6 @@
   :config
   ;; Generic mail setup
   (setq mail-user-agent 'mu4e-user-agent
-
 	user-full-name    "Valentin Schneider"
 	user-mail-address "valentin.schneider@arm.com")
 
