@@ -73,6 +73,9 @@
   :init
   (add-hook 'c-mode-hook 'ggtags-mode)
   (add-hook 'asm-mode-hook 'ggtags-mode)
+  :config
+  ;; Don't you dare rebind beginning of buffer FFS
+  (setq ggtags-enable-navigation-keys nil)
   :bind
   (("M-*" . xref-pop-marker-stack)))
 
