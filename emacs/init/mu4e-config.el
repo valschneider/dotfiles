@@ -1,12 +1,18 @@
 ;; Configuration of mu4e
 
-(defun vs/mu4e-compose-mode ()
-  (set-variable 'fill-column 75)
-  (flyspell-mode)
-  (flyspell-buffer))
 
 (use-package mu4e
   :load-path "/usr/local/share/emacs/site-lisp/mu4e"
+  :init
+  (require 'smtpmail)
+  (require 'org-mu4e nil t)
+
+  (defun vs/mu4e-compose-mode ()
+    (set-variable 'fill-column 75)
+    (flyspell-mode)
+    (flyspell-buffer))
+  :hook
+  (mu4e-compose-mode . vs/mu4e-compose-mode)
   :config
   ;; Generic mail setup
   (setq mail-user-agent 'mu4e-user-agent
@@ -21,8 +27,7 @@
 			      (:flags . 6)
 			      (:mailing-list . 10)
 			      (:from . 22)
-			      (:subject))))
-  (add-hook 'mu4e-compose-mode-hook 'vs/mu4e-compose-mode))
+			      (:subject)))))
 
 (defun mu4e-select-contact ()
   (mu4e~request-contacts)
