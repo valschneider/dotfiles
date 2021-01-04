@@ -29,16 +29,13 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq flycheck-temp-prefix ".flycheck"))
 
-;; Disable the idle time thing
-;; (setq flycheck-check-syntax-automatically '(save mode-enable))
-
 (use-package helm
   :ensure t
   :init (setq helm-split-window-inside-p t)
   :config
   (helm-mode 1)
-  (add-to-list 'helm-completing-read-handlers-alist
-	       '(ggtags-find-tag-dwim . helm-completing-read-default-find-tag))
+  ;; (add-to-list 'helm-completing-read-handlers-alist
+  ;;	       '(ggtags-find-tag-dwim . helm-completing-read-default-find-tag))
   :bind
   (("M-x" . helm-M-x)
    ("C-x C-r" . helm-find)))
@@ -68,7 +65,6 @@
    magit-log-cutoff-length 50
    magit-revision-insert-related-refs nil)
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
-
 
 (use-package ggtags
   :ensure t
