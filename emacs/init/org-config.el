@@ -17,6 +17,11 @@
 (setq org-checkbox-hierarchical-statistics nil)
 (setq org-hierarchical-todo-statistics nil)
 
+;; https://stackoverflow.com/a/24540651
+;; Allow emphasis after punctuation (i.e. struct.*foo*)
+(setcar org-emphasis-regexp-components " \t('\"{\t.,:!?;")
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+
 (defun org-mode-custom-setup()
   (set-variable 'fill-column 80)
   (auto-fill-mode))
