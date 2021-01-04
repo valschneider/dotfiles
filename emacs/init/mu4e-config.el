@@ -1,5 +1,6 @@
 ;; Configuration of mu4e
 
+(load-library "mu4e-thread")
 
 (use-package mu4e
   :load-path "/usr/local/share/emacs/site-lisp/mu4e"
@@ -77,9 +78,41 @@
   ;;   (git-commit-read-ident (format "%s <%s>" (nth 0 ident) (nth 1 ident)))))
   (git-commit-read-ident))
 
-(add-to-list 'mu4e-headers-actions '("apply as patch" . mu4e-action-git-apply-mbox) t)
+(defun vs/mu4e-action-copy-msgid (msg)
+  (let ((msgid (mu4e-message-field msg :message-id)))
+    (when msgid
+      (kill-new msgid))))
 
-(load-library "mu4e-thread")
+(defun vs/mu4e-action-git-apply-thread (msg)
+  "Apply as patches all messages that are a direct reply to the top mail in the
+thread."
+  (let ((msg-list ()))
+	;; XXX: figure out a non retarded way of getting topmost message-id
+	;; (thread-id (mu4e~headers-get-thread-info msg 'thread-id)))
+    (mu4e-headers-for-each
+     (lambda (msg)
+       ;; (message (mu4e-message-field msg :in-reply-to))
+       ;; (message thread-id)
+       ;; (when (string-equal
+       ;;	      ;; Message is directly in-reply-to thread id
+       ;;	      (mu4e-message-field msg :in-reply-to)
+       ;;	      thread-id)
+       (when (and
+	      (eq (plist-get (mu4e-message-field msg :thread) :level) 1)
+	      (not (string-prefix-p "Re:" (mu4e-message-field msg :subject))))
+	 (add-to-list 'msg-list msg))))
+
+    ;; (debug)
+    (mapc 'mu4e-action-git-apply-mbox
+	  (sort msg-list (lambda (msga msgb)
+			   (string<
+			    (mu4e-message-field msga :subject)
+			    (mu4e-message-field msgb :subject)))))))
+
+
+(add-to-list 'mu4e-headers-actions '("apply as patch" . mu4e-action-git-apply-mbox) t)
+(add-to-list 'mu4e-headers-actions '("Aapply series" . vs/mu4e-action-git-apply-thread) t)
+(add-to-list 'mu4e-headers-actions '("mcopy message-id" . vs/mu4e-action-copy-msgid) t)
 
 (defvar vs/mu4e-headers-search-query nil)
 (defun vs/mu4e-headers-search-register (query)
