@@ -114,10 +114,6 @@ background of code to the current emacs theme"
 ;; Default CSS for html exporting
 (setq org-html-head "<link href=\"http://doc.norang.ca/org.css\" rel=\"stylesheet\"></link>")
 
-(use-package ox-jira
-  :load-path "~/.emacs.d/packages/ox-jira/")
-
-;;(require 'ox-confluence)
 (use-package ox-confluence)
 
 ;; https://tex.stackexchange.com/a/319099

@@ -20,6 +20,8 @@
   (package-install 'use-package))
 
 ;; ---------- Load & config packages ----------
+(use-package org-plus-contrib
+  :ensure t)
 
 (use-package flycheck
   :ensure t
