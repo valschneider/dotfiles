@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec notmuch address from:"$*"

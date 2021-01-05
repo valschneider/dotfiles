@@ -1,0 +1,9 @@
++ml +lkml        -- to:linux-kernel@vger.kernel.org
++ml +lakml       -- to:linux-arm-kernel@lists.infradead.org
++ml +linux-pm    -- to:linux-pm@vger.kernel.org
++ml +trace-devel -- to:linux-trace-devel@vger.kernel.org
++ml +eas-dev     -- to:eas-dev@lists.linaro.org
+
++to-me -- to:valentin.schneider@arm.com
+
++ml +linux-eng   -- to:linux-eng@arm.com

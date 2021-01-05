@@ -1,0 +1,6 @@
+__directory__:
+  defaults:
+    dotify: False
+
+utils:
+  dotify: False
