@@ -1,6 +1,10 @@
 __directory__:
   defaults:
     dotify: False
+    target_dir: &dir !PromptPath
+      query: "maildir location"
+      default: "~/Work/email"
 
-utils:
-  dotify: False
+notmuch-hooks:
+  target_dir: !Path [*dir, .notmuch]
+  link_name: hooks

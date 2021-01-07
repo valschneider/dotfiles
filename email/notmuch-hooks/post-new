@@ -2,3 +2,5 @@
 
 DIR="$(dirname $(realpath $0))"
 notmuch tag --batch < "$DIR"/notmuch-tags
+
+# notmuch tag +mute $(notmuch search --output=threads tag:mute)
