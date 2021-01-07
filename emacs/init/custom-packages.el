@@ -4,15 +4,15 @@
 (use-package tla-mode
   :load-path "~/.emacs.d/packages/tla-mode/")
 
-(use-package flycheck-kernel
+(use-package flycheck-make-c
   :load-path "~/.emacs.d/packages/flycheck-kernel/"
   :config
   (eval-after-load 'flycheck
     '(progn
-       (flycheck-kernel-setup)
-       (setq flycheck-kernel-make-jobs "32"))))
+       (flycheck-make-c-setup)
+       (setq flycheck-make-c-jobs "32"))))
 
-(defun flycheck-kernel-toggle-clang ()
+(defun flycheck-make-c-toggle-clang ()
   (interactive)
   (setq flycheck-kernel-use-clang (not flycheck-kernel-use-clang)))
 
@@ -30,7 +30,7 @@ CHECKER is the flycheck checker to which NEXT-CHECKER will be chained."
   (eval-after-load 'flycheck
     '(progn
        (flycheck-checkpatch-setup)
-       (flycheck-add-next-checker-safe 'kernel-make 'checkpatch-code))))
+       (flycheck-add-next-checker-safe 'make-c 'checkpatch-code))))
 
 (use-package dwarf-mode
   :load-path "~/.emacs.d/packages/dwarf-mode/")
