@@ -6,6 +6,13 @@
 ;; Archive (ELPA), as the version there is likely not in sync with the command
 ;; line interface.
 
+;; XXX have a git package somewhere?
+(defun vs/git-apply-patch (file directory)
+  "Apply a patch file to a git repository.
+FILE the file to apply - any format accepted by $(git am).
+DIRECTORY the root directory of the git repository."
+  (shell-command (format "cd %s; git am -3 %s" directory file)))
+
 (use-package notmuch
   :init
   (defun vs/notmuch-tree-narrow-query ()
@@ -49,6 +56,39 @@
 	     (notmuch-address-options ""))
 	   ;; :fuzzy-match t
 	   :buffer "*Email completion*")))
+
+  (defun vs/notmuch-apply-patch ()
+    (interactive)
+    (vs/git-apply-patch (notmuch-show-get-filename)
+			(expand-file-name (read-directory-name "Git directory: " nil nil t))))
+
+  (defun vs/notmuch-tree-get-depth ()
+    "Get the depth of the message at point in the thread.
+0-based, as all things should be."
+    ;; FIXME: please tell me there is a depth indicator that doesn't have to rely
+    ;; display attributes, this makes me wanna puke...
+    (- (length (plist-get (notmuch-tree-get-message-properties) :tree-status)) 2))
+
+  (defun vs/notmuch-tree-get-subject ()
+    (plist-get (notmuch-tree-get-prop :headers) :Subject))
+
+  (defun vs/notmuch-apply-thread ()
+    ;; Iterate over first descendent of cover letter; apply
+    (interactive)
+    (let ((directory
+	   (expand-file-name (read-directory-name "Git directory: " nil nil t)))
+	  (first (save-excursion (progn
+				  (notmuch-tree-thread-top)
+				  (vs/notmuch-tree-get-subject)))))
+
+      (notmuch-tree-thread-mapcar
+       (lambda ()
+	 (when (and
+		(= (vs/notmuch-tree-get-depth) 1)
+		(not (string-prefix-p "Re:" (vs/notmuch-tree-get-subject))))
+	   (vs/git-apply-patch (notmuch-show-get-filename) directory))))
+      )
+    )
 
   (defun vs/notmuch-tree-toggle-tag (tag)
     "Toggle a given tag for the message at point.
