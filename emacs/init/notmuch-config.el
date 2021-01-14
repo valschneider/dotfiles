@@ -22,22 +22,21 @@ DIRECTORY the root directory of the git repository."
      (notmuch-tree-get-query)
      (notmuch-read-query "Notmuch tree narrow query: ")))
 
-  (defun vs/notmuch-tree-thread-at-point ()
-    "Get the thread-id of message at point."
-    ;; Below query should work for newer versions :'(
-    ;; (concat "thread:{id:" (notmuch-show-stash-message-id) "}"))
-    (car (process-lines
-	  notmuch-command
-	  "search"
-	  "--output=threads"
-	  (notmuch-show-get-message-id))))
+  (defun vs/notmuch-matching-threads (query)
+    "Get the threads matching a given query
+QUERY is the given notmuch query."
+    (process-lines
+     notmuch-command
+     "search"
+     "--output=threads"
+     query))
 
   (defun vs/notmuch-tree-narrow-to-thread ()
     "Narrow the current tree search to the highlighted thread."
     (interactive)
     (notmuch-tree
      (notmuch-tree-get-query)
-     (vs/notmuch-tree-thread-at-point)))
+     (car (vs/notmuch-matching-threads (notmuch-show-get-message-id)))))
 
   (defvar vs/notmuch-tree-narrow-map
     (let ((map (make-sparse-keymap)))
