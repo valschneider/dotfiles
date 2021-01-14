@@ -57,6 +57,7 @@
 
 ;; Code-folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
 
 ;; https://www.reddit.com/r/emacs/comments/746cd0/which_code_folding_package_do_you_use/dnwi2x1
 (defun toggle-folding ()
