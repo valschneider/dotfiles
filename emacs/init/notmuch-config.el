@@ -48,14 +48,27 @@ DIRECTORY the root directory of the git repository."
   (fset 'vs/notmuch-tree-narrow-map vs/notmuch-tree-narrow-map)
 
   (defun vs/notmuch-select-contact ()
-    (interactive)
-    (insert
      (helm :sources
 	   (helm-build-sync-source "emails"
 	     :candidates
 	     (notmuch-address-options ""))
 	   ;; :fuzzy-match t
-	   :buffer "*Email completion*")))
+	   :buffer "*Email completion*"))
+
+  (defun vs/notmuch-insert-contact ()
+    (interactive)
+    (insert (vs/notmuch-select-contact)))
+
+  (defun vs/git-commit-read-ident ()
+    ;; XXX rfc822-addresses()
+    (let ((contact (vs/notmuch-select-contact)))
+      (string-match "\\(.*[[:alnum:]]\\)[[:space:]]*<\\(.*\\)>" contact)
+      (list
+       (match-string 1 contact)
+       (match-string 2 contact))
+      ))
+  (advice-add 'git-commit-self-ident :override  #'vs/git-commit-read-ident)
+  (advice-add 'git-commit-read-ident :override  #'vs/git-commit-read-ident)
 
   (defun vs/notmuch-apply-patch ()
     (interactive)
