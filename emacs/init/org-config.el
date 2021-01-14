@@ -1,6 +1,9 @@
 (require 'org)
 (require 'ox)
 
+;; Folded by default
+(setq org-startup-folded t)
+
  ;; Prevent agenda from nuking my windows
 (setq org-agenda-window-setup 'current-window)
 
