@@ -118,7 +118,7 @@ background of code to the current emacs theme"
 
 (defun org-export-pdfize-code ()
   (interactive)
-  (org-export-to-buffer 'latex-html "pdfize"))
+  (org-export-as 'latex-html))
 
 ;; Default CSS for html exporting
 (setq org-html-head "<link href=\"http://doc.norang.ca/org.css\" rel=\"stylesheet\"></link>")
