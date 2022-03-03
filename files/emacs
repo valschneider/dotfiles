@@ -9,5 +9,5 @@
 (load-library "custom-packages")
 (load-library "emacs-config")
 (load-library "org-config")
-(load-library "mu4e-config")
 (load-library "notmuch-config")
+(load-library "email-config")
