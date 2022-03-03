@@ -10,3 +10,6 @@
 [submodule "emacs/packages/flycheck-checkpatch"]
 	path = emacs/packages/flycheck-checkpatch
 	url = git@github.com:valschneider/flycheck-checkpatch.git
+[submodule "emacs/packages/ob-rust"]
+	path = emacs/packages/ob-rust
+	url = https://github.com/micanzhang/ob-rust.git

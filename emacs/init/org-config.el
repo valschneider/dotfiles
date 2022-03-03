@@ -44,7 +44,8 @@
 	   (shell . t)
 	   (C . t)
 	   (plantuml . t)
-	   (ditaa . t))))
+	   (ditaa . t)
+	   (rust . t))))
 
 (setq org-babel-python-command "python3")
 

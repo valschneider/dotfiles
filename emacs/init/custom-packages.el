@@ -38,3 +38,6 @@ CHECKER is the flycheck checker to which NEXT-CHECKER will be chained."
 (use-package cocci
   :load-path "~/dotfiles/work/coccinelle/editors/emacs/"
   :mode ("\\.cocci\\'" . cocci-mode))
+
+(use-package ob-rust
+  :load-path "~/.emacs.d/packages/ob-rust/")
