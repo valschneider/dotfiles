@@ -7,6 +7,7 @@ email = valentin.schneider@arm.com
 	default = simple
 [alias]
 	slog = log --oneline --decorate
+	sloga = log --format='%C(yellow)%h%C(auto) %s %C(green)(%aN) %C(auto)'
 	woof = log --all --decorate --oneline --graph
 
 	klog = log --format='%C(auto)%h %C(red)(\"%C(auto)%s%C(red)\")%C(auto)' --abbrev=12
@@ -18,6 +19,8 @@ email = valentin.schneider@arm.com
 	send-email-test = send-email --to valentin.schneider@arm.com --no-chain-reply-to --no-signed-off-by-cc --suppress-cc=all --suppress-from
 
 	send-email-lkml = send-email --to linux-kernel@vger.kernel.org --confirm always --no-chain-reply-to --suppress-from
+
+	send-email-list = send-email --confirm always --no-chain-reply-to --suppress-from
 [sendemail]
 	confirm = always
 	multiedit = false
