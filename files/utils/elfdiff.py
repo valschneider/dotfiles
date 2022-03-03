@@ -10,6 +10,9 @@ def get_symtab(elffile):
     symtab = elffile.get_section_by_name(".symtab")
 
     for symbol in symtab.iter_symbols():
+        if "OBJECT" in symbol.entry["st_info"]["type"]:
+            continue
+
         res[symbol.name] = symbol.entry["st_size"]
 
     return res
@@ -76,13 +79,17 @@ def main():
         # Sort them by descending delta order
         diff.sort(key=lambda x : x.delta, reverse=True)
 
+        total = 0
         align = "{:<36}{:<10}{:<10}{:<10}"
         print(align.format("NAME", "BEFORE", "AFTER", "DELTA"))
         for name, before, after, delta in diff:
+            total += delta
             print(align.format(
                 name, before, after,
                 str(delta) if delta <= 0 else "+{}".format(delta))
             )
+        print("------------------------------------------------------------------")
+        print(align.format("DELTA SUM", "", "", "{:+d}".format(total)))
 
 if __name__ == "__main__":
     main()
