@@ -11,10 +11,12 @@
   "Apply a patch file to a git repository.
 FILE the file to apply - any format accepted by $(git am).
 DIRECTORY the root directory of the git repository."
-  (shell-command (format "cd %s; git am -3 %s" directory file)))
+  (shell-command (format "cd %s; git am -3 '%s'" directory file)))
 
 (use-package notmuch
   :init
+  (setq notmuch-address-command "/home/valsch01/dotfiles/emacs/init/notmuch-addresses")
+
   (defun vs/notmuch-tree-narrow-query ()
     "Narrow the current tree search with a further query."
     (interactive)
@@ -30,6 +32,19 @@ QUERY is the given notmuch query."
      "search"
      "--output=threads"
      query))
+
+  (defun vs/notmuch-hello-insert-tracked-searches ()
+    (let ((searches (notmuch-hello-query-counts
+		     `(("Tracked patches" . ,(string-join
+					      (vs/notmuch-matching-threads "tag:track")
+					      " or ")))
+		     :show-empty-searches notmuch-show-empty-saved-searches)))
+      (when searches
+	(widget-insert "Dynamic queries: ")
+	(widget-insert "\n\n")
+	(let ((start (point)))
+	  (notmuch-hello-insert-buttons searches)
+	  (indent-rigidly start (point) notmuch-hello-indent)))))
 
   (defun vs/notmuch-tree-narrow-to-thread ()
     "Narrow the current tree search to the highlighted thread."
@@ -123,7 +138,11 @@ TAG is the tag to toggle."
 	      ("t" . (lambda () (interactive) (vs/notmuch-tree-toggle-tag "track")))
 	      ("T" . (lambda () (interactive) (vs/notmuch-tree-toggle-thread-tag "track"))))
   ;; XXX: cannot specify keymap in :bind-keymap ?
-  :config (define-key notmuch-tree-mode-map "n" 'vs/notmuch-tree-narrow-map)
+  :config
+  (define-key notmuch-tree-mode-map "n" 'vs/notmuch-tree-narrow-map)
+  ;; XXX: version >= 0.24
+  ;; Use the default saving behaviour (doesn't involve notmuch database)
+  (define-key notmuch-message-mode-map (kbd "C-x C-s") nil)
   ;; :bind-keymap (:map notmuch-tree-mode-map
 	      ;; ("n" . vs/notmuch-tree-narrow-map))
   )

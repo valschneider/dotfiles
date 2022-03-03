@@ -1,3 +1,9 @@
 #!/bin/bash
 
-exec notmuch address from:"$*"
+echo "'$#' '$@' '$0'" >> ~/kkl
+
+if [ "$#" -gt 1 ]; then
+    exec notmuch address from:"$@"'*'
+else
+    exec notmuch address '*'
+fi
