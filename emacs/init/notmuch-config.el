@@ -133,10 +133,10 @@ TAG is the tag to toggle."
       (notmuch-tree-tag-thread (list (concat "+" tag)))))
 
   :bind (:map notmuch-tree-mode-map
-	      ("i" . (lambda () (interactive) (vs/notmuch-tree-toggle-tag "inbox")))
-	      ("I" . (lambda () (interactive) (vs/notmuch-tree-toggle-thread-tag "inbox")))
-	      ("t" . (lambda () (interactive) (vs/notmuch-tree-toggle-tag "track")))
-	      ("T" . (lambda () (interactive) (vs/notmuch-tree-toggle-thread-tag "track"))))
+	      ("i" . (lambda () (interactive) (vs/notmuch-tree-toggle-tag "inbox")        (notmuch-tree-refresh-view)))
+	      ("I" . (lambda () (interactive) (vs/notmuch-tree-toggle-thread-tag "inbox") (notmuch-tree-refresh-view)))
+	      ("t" . (lambda () (interactive) (vs/notmuch-tree-toggle-tag "track")        (notmuch-tree-refresh-view)))
+	      ("T" . (lambda () (interactive) (vs/notmuch-tree-toggle-thread-tag "track") (notmuch-tree-refresh-view))))
   ;; XXX: cannot specify keymap in :bind-keymap ?
   :config
   (define-key notmuch-tree-mode-map "n" 'vs/notmuch-tree-narrow-map)
