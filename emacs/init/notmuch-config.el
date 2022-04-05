@@ -189,7 +189,7 @@ the same as for the function notmuch-tree."
       (set-process-filter proc 'notmuch-tree-process-filter)
       (set-process-query-on-exit-flag proc nil))))
 
-(advice-add 'notmuch-tree-worker :override #'vs/notmuch-tree-worker)
+;; (advice-add 'notmuch-tree-worker :override #'vs/notmuch-tree-worker)
 ;; XXX UPSTREAM ME XXX
 
 ;; addr
