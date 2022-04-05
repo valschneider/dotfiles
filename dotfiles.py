@@ -35,7 +35,7 @@ yaml.add_constructor('!Path', build_constructor_seq(Path))
 
 class Dotfile:
 
-    VERBOSE = True
+    VERBOSE = False
 
     def __init__(self, source, target, dotify=False, create_parent=False):
         self.source = source
