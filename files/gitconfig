@@ -1,6 +1,6 @@
 [user]
-name = Valentin Schneider
-email = valentin.schneider@arm.com
+	name = Valentin Schneider
+	email = vschneid@redhat.com
 [core]
 	editor = emacs
 [push]
@@ -16,13 +16,20 @@ email = valentin.schneider@arm.com
 	# https://stackoverflow.com/a/5188364/5096023
 	btime = for-each-ref --sort=committerdate --format='%(color:yellow)%(objectname:short)%(color:reset) %(refname:short) (%(color:green)%(committerdate:relative)%(color:reset))'
 
-	send-email-test = send-email --to valentin.schneider@arm.com --no-chain-reply-to --no-signed-off-by-cc --suppress-cc=all --suppress-from
+	send-email-test = send-email --to vschneid@redhat.com --no-chain-reply-to --no-signed-off-by-cc --suppress-cc=all --suppress-from
 
 	send-email-lkml = send-email --to linux-kernel@vger.kernel.org --confirm always --no-chain-reply-to --suppress-from
 
 	send-email-list = send-email --confirm always --no-chain-reply-to --suppress-from
 [sendemail]
+	smtpserver = smtp.gmail.com
+	smtpuser = vschneid@redhat.com
+	smtpencryption = tls
+	smtpserverport = 587
+	from = Valentin Schneider <vschneid@redhat.com>
 	confirm = always
 	multiedit = false
+[credential]
+	helper = store
 [rerere]
 	enabled = false
