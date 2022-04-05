@@ -11,3 +11,40 @@
 (load-library "org-config")
 (load-library "notmuch-config")
 (load-library "email-config")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+  '(notmuch-hello-sections
+   (quote
+    (notmuch-hello-insert-header notmuch-hello-insert-saved-searches
+				 (notmuch-hello-insert-searches "Patches"
+								(("Inbox patches" . "tag:to-me and tag:ml and tag:inbox")
+								 ("Inbox sched"   . "tag:lkml and (subject:sched or body:kernel/sched) and tag:inbox and not tag:to-me")
+								 ("Unfiltered patches" . "tag:to-me and tag:ml"))
+								nil nil)
+				 (notmuch-hello-insert-searches "Mailing lists"
+								(("LKML sched" . "tag:lkml and subject:sched")
+								 ("LAKML" . "tag:lakml")
+								 ("IRQ" . "(subject:irq or subject:irqchip or subject:gic)"))
+								:filter "(tag:ml)" nil nil)
+				 vs/notmuch-hello-insert-tracked-searches notmuch-hello-insert-search notmuch-hello-insert-recent-searches notmuch-hello-insert-alltags notmuch-hello-insert-footer)))
+ '(notmuch-message-headers (quote ("Subject" "To" "Cc" "Date" "In-Reply-To")))
+ '(notmuch-saved-searches
+   (quote
+    ((:name "Inbox" :query "(not tag:ml) and tag:inbox" :key "i")
+     (:name "Patches to triage" :query "tag:to-me and tag:triage")
+     (:name "linux-pm" :query "tag:linux-pm and date:\"month..now\""))))
+ '(notmuch-show-stash-mlarchive-link-alist (quote (("LKML" . "http://lore.kernel.org/r/"))))
+ '(notmuch-tree-result-format
+   (quote
+    (("date" . "%12s  ")
+     ("authors" . "%-20s")
+     ((("tree" . "%s")
+       ("subject" . "%s"))
+      . " %-120s ")
+     ("tags" . "(%s)"))))
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))))
