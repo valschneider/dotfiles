@@ -29,6 +29,9 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq flycheck-temp-prefix ".flycheck"))
 
+(use-package projectile
+  :ensure t)
+
 (use-package helm
   :ensure t
   :init (setq helm-split-window-inside-p t)
