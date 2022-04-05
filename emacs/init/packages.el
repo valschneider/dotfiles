@@ -89,4 +89,4 @@
 (add-hook 'c-mode-hook 'ggtags-mode)
 (add-hook 'asm-mode-hook 'ggtags-mode)
 
-(flycheck-set-checker-executable "pylint" "epylint3")
+(flycheck-set-checker-executable "pylint" "epylint-3")
