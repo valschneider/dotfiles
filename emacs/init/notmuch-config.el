@@ -15,7 +15,7 @@ DIRECTORY the root directory of the git repository."
 
 (use-package notmuch
   :init
-  (setq notmuch-address-command "/home/valsch01/dotfiles/emacs/init/notmuch-addresses")
+  (setq notmuch-address-command (concat (file-name-directory load-file-name) "./notmuch-addresses"))
 
   (defun vs/notmuch-tree-narrow-query ()
     "Narrow the current tree search with a further query."
