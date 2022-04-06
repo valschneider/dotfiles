@@ -5,7 +5,7 @@
 (add-hook 'message-mode-hook 'vs/message-mode-hook)
 
 (setq user-full-name    "Valentin Schneider"
-      user-mail-address "valentin.schneider@arm.com"
+      user-mail-address "vschneid@redhat.com"
 
       ;; XXX: there's a nice message-cite-style-thunderbird, but
       ;; a) it doesn't work, b) it uses the retarded m/d/y format
@@ -13,10 +13,11 @@
       message-citation-line-format "On %d/%m/%y %R, %N wrote:")
 
 (setq message-send-mail-function 'smtpmail-send-it
-      ;; smtpmail-starttls-credentials '(("foss.arm.com" 587 nil nil))
-      smtpmail-default-smtp-server "foss.arm.com"
-      smtpmail-smtp-server "foss.arm.com"
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-user "vschneid@redhat.com"
+      smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587
+      smtpmail-stream-type 'starttls
       smtpmail-debug-info t)
 
 (defun vs/message-tweak-unique-id (id)
