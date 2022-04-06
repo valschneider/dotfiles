@@ -61,12 +61,15 @@
   (setq
    magit-refresh-status-buffer nil
    magit-default-tracking-name-function 'magit-default-tracking-name-branch-only
-   ;; Limit the max logcount and don't use --graph
-   magit-log-section-arguments (list "-n256" "--decorate")
-   magit-log-arguments (list "-n256" "--decorate")
-   magit-log-select-arguments (list "-n256" "--decorate")
    magit-log-cutoff-length 50
    magit-revision-insert-related-refs nil)
+
+  ;; Disable --graph by default because that's too slow for the kernel
+  (put 'magit-log-mode 'magit-log-default-arguments
+       '("-n256" "--decorate"))
+  (put 'magit-log-select-mode 'magit-log-default-arguments
+       '("-n256" "--decorate"))
+
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
 
 (use-package ggtags
