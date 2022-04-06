@@ -24,7 +24,5 @@ email = valentin.schneider@arm.com
 [sendemail]
 	confirm = always
 	multiedit = false
-[http]
-	cookiefile = /home/valsch01/.gitcookies
 [rerere]
 	enabled = false
