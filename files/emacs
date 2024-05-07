@@ -16,35 +16,55 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-  '(notmuch-hello-sections
-   (quote
-    (notmuch-hello-insert-header notmuch-hello-insert-saved-searches
-				 (notmuch-hello-insert-searches "Patches"
-								(("Inbox patches" . "tag:to-me and tag:ml and tag:inbox")
-								 ("Inbox sched"   . "tag:lkml and (subject:sched or body:kernel/sched) and tag:inbox and not tag:to-me")
-								 ("Unfiltered patches" . "tag:to-me and tag:ml"))
-								nil nil)
-				 (notmuch-hello-insert-searches "Mailing lists"
-								(("LKML sched" . "tag:lkml and subject:sched")
-								 ("LAKML" . "tag:lakml")
-								 ("IRQ" . "(subject:irq or subject:irqchip or subject:gic)"))
-								:filter "(tag:ml)" nil nil)
-				 vs/notmuch-hello-insert-tracked-searches notmuch-hello-insert-search notmuch-hello-insert-recent-searches notmuch-hello-insert-alltags notmuch-hello-insert-footer)))
- '(notmuch-message-headers (quote ("Subject" "To" "Cc" "Date" "In-Reply-To")))
- '(notmuch-saved-searches
-   (quote
-    ((:name "Inbox" :query "(not tag:ml) and tag:inbox" :key "i")
-     (:name "Patches to triage" :query "tag:to-me and tag:triage")
-     (:name "linux-pm" :query "tag:linux-pm and date:\"month..now\""))))
- '(notmuch-show-stash-mlarchive-link-alist (quote (("LKML" . "http://lore.kernel.org/r/"))))
+ '(custom-safe-themes
+   '("8b930a6af47e826c12be96de5c28f1d142dccab1927f196589dafffad0fc9652" "cfe4d36ed4cf00a541f7ba0deb38c94808c13a3e4c717f07bc3b9c866670e8d1" "f4d1a9207fe07c937b5e1ba22f16c94e7508872892e642e8bfd2343590f3d3b6" "98fd239f11dda977dd7fe756b3c7719b1e5e7dc9bcd10898c027c419e8c31b29" "78e9a3e1c519656654044aeb25acb8bec02579508c145b6db158d2cfad87c44e" default))
+
+ '(notmuch-hello-sections
+   '(notmuch-hello-insert-header
+
+     (notmuch-hello-insert-searches
+      "Corporate mail"
+      ((:name "Inbox" :query "(not tag:ml) and tag:inbox" :key "i" :search-type tree)))
+
+
+     (notmuch-hello-insert-searches
+      "Patches"
+      ((:name "Inbox patches" :query "tag:to-me and tag:ml and tag:inbox" :search-type tree)
+       (:name "Inbox sched"   :query "tag:lkml and (subject:sched or body:kernel/sched) and tag:inbox and not tag:to-me" :search-type tree)
+       (:name "Unfiltered patches" :query "tag:to-me and tag:ml" :search-type tree)))
+
+     (notmuch-hello-insert-searches
+      "Mailing lists"
+      ((:name "LKML sched" :query "tag:lkml and subject:sched" :search-type tree)
+       (:name "LKML rt"    :query "tag:lkml-rt" :search-type tree)
+       (:name "LAKML"      :query "tag:lakml" :search-type tree)
+       (:name "IRQ"        :query "(subject:irq or subject:irqchip or subject:gic)" :search-type tree))
+      :filter "(tag:ml)")
+
+     vs/notmuch-hello-insert-tracked-searches
+     notmuch-hello-insert-search
+     notmuch-hello-insert-recent-searches
+     notmuch-hello-insert-alltags
+     notmuch-hello-insert-footer))
+
+ '(notmuch-message-headers '("Subject" "To" "Cc" "Date" "In-Reply-To" "Message-Id"))
+ '(notmuch-show-stash-mlarchive-link-alist '(("LKML" . "http://lore.kernel.org/r/")))
  '(notmuch-tree-result-format
-   (quote
-    (("date" . "%12s  ")
+   '(("date" . "%12s  ")
      ("authors" . "%-20s")
      ((("tree" . "%s")
        ("subject" . "%s"))
       . " %-120s ")
-     ("tags" . "(%s)"))))
+     ("tags" . "(%s)")))
  '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))))
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
+ '(package-selected-packages
+   '(leuven-theme standard-themes htmlize org go-mode yaml-mode zenburn-theme use-package projectile magit helm-descbinds helm-ag ggtags flycheck dts-mode))
+ '(warning-suppress-types '(((flycheck syntax-checker)) (org))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(put 'upcase-region 'disabled nil)
