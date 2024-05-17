@@ -65,7 +65,7 @@ QUERY is the given notmuch query."
      (helm :sources
 	   (helm-build-sync-source "emails"
 	     :candidates
-	     (notmuch-address-options ""))
+	     (notmuch-address-matching ""))
 	   ;; :fuzzy-match t
 	   :buffer "*Email completion*"))
 
@@ -73,7 +73,7 @@ QUERY is the given notmuch query."
     (interactive)
     (insert (vs/notmuch-select-contact)))
 
-  (defun vs/git-commit-read-ident ()
+  (defun vs/git-commit-read-ident (&optional prompt)
     ;; XXX rfc822-addresses()
     (let ((contact (vs/notmuch-select-contact)))
       (string-match "\\(.*[[:alnum:]]\\)[[:space:]]*<\\(.*\\)>" contact)
