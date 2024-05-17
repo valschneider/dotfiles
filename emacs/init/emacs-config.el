@@ -139,8 +139,9 @@ same directory as the org-buffer and insert a link to this file."
     (insert (concat "[[file:" filename "]]"))))
 
 (defun vs/copy-region-to-clipboard ()
- (interactive)
- (shell-command-on-region (region-beginning) (region-end) "xclip -selection clipboard &>/dev/null"))
+  (interactive)
+  (when (use-region-p)
+    (shell-command-on-region (region-beginning) (region-end) "xclip -selection clipboard &>/dev/null")))
 
 (defun vs/copy-region-to-clipboard-kill-advice (&rest _unused) (vs/copy-region-to-clipboard))
 (advice-add 'kill-ring-save :before #'vs/copy-region-to-clipboard-kill-advice)
