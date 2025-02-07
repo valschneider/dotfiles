@@ -200,5 +200,15 @@ the same as for the function notmuch-tree."
 ;; (advice-add 'notmuch-tree-worker :override #'vs/notmuch-tree-worker)
 ;; XXX UPSTREAM ME XXX
 
+
+(defun vs/notmuch-add-my-address (proc event)
+  "For some reason address harvest doesn't correctly get my own address (I guess
+I don't really send emails to myself), manually add it to the hash list.
+
+PROC and EVENT are not really documented and I only figured out they were
+required due to warnings & looking at notmuch-lib.el. Yay."
+  (puthash "Valentin Schneider <vschneid@redhat.com>" t notmuch-address-completions))
+(notmuch-address-harvest nil nil 'vs/notmuch-add-my-address)
+
 ;; addr
 (rfc822-addresses "Valentin Schneider <valentin.schneider@arm.com>")
