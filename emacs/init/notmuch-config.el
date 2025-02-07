@@ -82,15 +82,15 @@ QUERY is the given notmuch query."
        (match-string 2 contact))
       ))
 
-  (defun vs/git-commit-insert-header (header name email)
+  (defun vs/git-commit-insert-header (original-function header name email)
     (if (bound-and-true-p git-commit-mode)
-	(git-commit-insert-header header name email)
+	(funcall original-function header name email)
       ;; else
       (insert (format "%s: %s <%s>" header name email))))
 
   (advice-add 'git-commit-self-ident :override  #'vs/git-commit-read-ident)
   (advice-add 'git-commit-read-ident :override  #'vs/git-commit-read-ident)
-  (advice-add 'git-commit-insert-header :override #'vs/git-commit-insert-header)
+  (advice-add 'git-commit-insert-header :around #'vs/git-commit-insert-header)
 
   (defun vs/notmuch-apply-patch ()
     (interactive)
